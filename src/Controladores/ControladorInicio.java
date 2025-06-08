@@ -1,5 +1,11 @@
 package Controladores;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import Clases.Entrenador;
 import Interfaces.Inicio;
 import Vistas.Entrenadores;
 
@@ -37,5 +43,21 @@ public class ControladorInicio {
 
     public void setESGUI(boolean ESGUI) {
         this.ESGUI = ESGUI;
+    }
+
+    public void IniciarCarga(File[] archivos){
+        Entrenador entrenador1 = CargarEntrenador(archivos[0].getAbsolutePath());
+        Entrenador entrenador2 = CargarEntrenador(archivos[1].getAbsolutePath());
+        ControladorSeleccion controladorSeleccion = new ControladorSeleccion(new Vistas.SeleccionPokemon(), entrenador1, entrenador2, ESGUI);
+        controladorSeleccion.cambiarVista();
+    }
+
+    public Entrenador CargarEntrenador(String ruta) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ruta))) {
+            return (Entrenador) ois.readObject(); // convierte el archivo en un objeto real
+        } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                return null;
+        }
     }
 }

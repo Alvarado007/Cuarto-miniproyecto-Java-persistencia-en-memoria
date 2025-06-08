@@ -11,7 +11,10 @@ package Vistas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.lang.ModuleLayer.Controller;
+
+import javax.swing.JOptionPane;
 
 import Controladores.ControladorInicio;
 import Interfaces.Inicio;
@@ -39,6 +42,7 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
         LabelFondoInicio = new javax.swing.JLabel();
         BotonTerminal = new javax.swing.JButton();
         BotonCargarPartida = new javax.swing.JButton();
+        Seleccionador = new javax.swing.JFileChooser("src/Guardados");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(12, 28, 108));
@@ -79,6 +83,9 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
         LabelFondoInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logos/Pikachu Fondo Resized.jpeg"))); // NOI18N
         PanelDeInicio.add(LabelFondoInicio);
         LabelFondoInicio.setBounds(0, 0, 800, 600);
+
+        Seleccionador.setMultiSelectionEnabled(true);
+        Seleccionador.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
 
         getContentPane().add(PanelDeInicio);
         PanelDeInicio.setBounds(0, 0, 800, 600);
@@ -128,6 +135,7 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
     private javax.swing.JLabel LabelLogo;
     private javax.swing.JPanel PanelDeInicio;
     private javax.swing.JButton BotonTerminal;
+    private javax.swing.JFileChooser Seleccionador;
     // End of variables declaration                   
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -135,9 +143,20 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
             this.controlador.setESGUI(false);
             this.dispose();
             controlador.cambiarVista();
-        } else {
+        } else if (e.getSource() == BotonJugar) {
             controlador.iniciarJuego();
             this.dispose();
+        }
+        else if (e.getSource() == BotonCargarPartida) {
+            int respuesta = Seleccionador.showOpenDialog(null);
+            if (respuesta == javax.swing.JFileChooser.APPROVE_OPTION) {
+                File[] archivosSeleccionados = Seleccionador.getSelectedFiles();
+                controlador.IniciarCarga(archivosSeleccionados);
+                JOptionPane.showMessageDialog(this, "Partida Seleccionada exitosamente.");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se seleccionó ninguna partida.");
+            }
         }
     }
 
