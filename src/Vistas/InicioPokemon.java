@@ -38,6 +38,7 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
         BotonJugar = new javax.swing.JButton();
         LabelFondoInicio = new javax.swing.JLabel();
         BotonTerminal = new javax.swing.JButton();
+        BotonCargarPartida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(12, 28, 108));
@@ -67,6 +68,13 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
         PanelDeInicio.add(BotonTerminal);
         BotonTerminal.setBounds(630, 500, 160, 90);
         BotonTerminal.addActionListener(this);
+
+        BotonCargarPartida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logos/Cargar Partida.png"))); // NOI18N
+        BotonCargarPartida.setBorderPainted(false);
+        BotonCargarPartida.setContentAreaFilled(false);
+        PanelDeInicio.add(BotonCargarPartida);
+        BotonCargarPartida.setBounds(20, 500, 160, 90);
+        BotonCargarPartida.addActionListener(this);
 
         LabelFondoInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logos/Pikachu Fondo Resized.jpeg"))); // NOI18N
         PanelDeInicio.add(LabelFondoInicio);
@@ -107,7 +115,7 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-          public void run() {
+            public void run() {
                 new InicioPokemon().setVisible(true);
             }
         });
@@ -115,6 +123,7 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton BotonJugar;
+    private javax.swing.JButton BotonCargarPartida;
     private javax.swing.JLabel LabelFondoInicio;
     private javax.swing.JLabel LabelLogo;
     private javax.swing.JPanel PanelDeInicio;
