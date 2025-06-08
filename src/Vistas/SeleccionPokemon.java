@@ -203,6 +203,9 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
             controlador.InicioBatalla(ListEntrenador1.getSelectedValue(), ListEntrenador2.getSelectedValue());
             this.dispose();
         }
+        else if (e.getSource() == BotonGuardarPartida) {
+            controlador.IniciarGuardado();
+        }
         // if (PokemonGuardado == null) {
         //     Pokemon pokemon1 = ListEntrenador1.getSelectedValue();
         //     Pokemon pokemon2 = ListEntrenador2.getSelectedValue();

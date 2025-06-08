@@ -1,6 +1,8 @@
 package Clases;
 
-public abstract class SerVivo {
+import java.io.Serializable;
+
+public abstract class SerVivo implements Serializable{
     abstract void felicidad();
     abstract void tristeza();
 
