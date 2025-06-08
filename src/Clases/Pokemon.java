@@ -1,11 +1,12 @@
 package Clases;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
 import Enums.TiposPokemon;
 
-public class Pokemon {
+public class Pokemon implements Serializable {
     private String nombre;
     private ArrayList<Ataque> ataques;
     private TiposPokemon tipo;

@@ -1,5 +1,6 @@
 package Clases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -7,7 +8,7 @@ import java.util.Scanner;
 import Enums.TipoDano;
 import Enums.TiposPokemon;
 
-public class Entrenador extends SerVivo {
+public class Entrenador extends SerVivo implements Serializable{
     private String nombre_entrenador;
     private ArrayList<Pokemon> equipo_entrenador;
     private byte contador_pokemones = 0;

@@ -1,10 +1,11 @@
 package Clases;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Enums.TipoDano;
 import Enums.TiposPokemon;
 
-public class Ataque {
+public class Ataque implements Serializable {
     private String nombreAtaque;
     private TipoDano tipoDano;
     private short potencia;

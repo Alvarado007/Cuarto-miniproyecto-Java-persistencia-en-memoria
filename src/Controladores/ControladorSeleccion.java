@@ -1,5 +1,9 @@
 package Controladores;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -74,6 +78,24 @@ public class ControladorSeleccion {
         else if(entrenador2.getEquipo_entrenador().size() == 0) {
             vista.Mensaje("No hay pokemones disponibles para la batalla, el entrenador " + entrenador1.getNombre_entrenador() + " ha ganado");
             System.exit(0);
+        }
+    }
+
+    public void IniciarGuardado() {
+        GuardarPartida(entrenador1);
+        GuardarPartida(entrenador2);
+    }
+
+    public void GuardarPartida(Entrenador jugador) {
+        String rutaBase = "src/Guardados/";
+        String nombreArchivo = jugador.getNombre_entrenador() + ".txt"; // usa el nombre del jugador
+        String rutaCompleta = rutaBase + nombreArchivo;
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaCompleta))) {
+            oos.writeObject(jugador); // serializa y guarda el objeto en el archivo
+            vista.Mensaje("Partida guardada correctamente en: " + rutaCompleta);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
