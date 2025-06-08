@@ -56,6 +56,7 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
         BotonContinuarSeleccionPokemon = new javax.swing.JButton();
         LabelFondoSeleccionPokemon = new javax.swing.JLabel();
         BotonTerminal = new javax.swing.JButton();
+        BotonGuardarPartida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(12, 28, 108));
@@ -120,6 +121,13 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
         BotonTerminal.setBounds(630, 500, 160, 90);
         BotonTerminal.addActionListener(this);
 
+        BotonGuardarPartida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logos/Guardar Partida.png"))); // NOI18N
+        BotonGuardarPartida.setBorderPainted(false);
+        BotonGuardarPartida.setContentAreaFilled(false);
+        jPanel1.add(BotonGuardarPartida);
+        BotonGuardarPartida.setBounds(20, 500, 160, 90);
+        BotonGuardarPartida.addActionListener(this);
+
         LabelFondoSeleccionPokemon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logos/Pikachu Fondo Resized.jpeg"))); // NOI18N
         jPanel1.add(LabelFondoSeleccionPokemon);
         LabelFondoSeleccionPokemon.setBounds(0, 0, 800, 600);
@@ -181,6 +189,7 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton BotonTerminal;
+    private javax.swing.JButton BotonGuardarPartida;
     // End of variables declaration
     @Override
     public void actionPerformed(ActionEvent e) {
