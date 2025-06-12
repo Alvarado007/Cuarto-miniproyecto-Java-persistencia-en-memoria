@@ -30,6 +30,7 @@ public class SeleccionPokemonTerminal implements SeleccionPokemonInterface{
                 System.out.println("1. Seleccionar pokemones");
                 System.out.println("2. Cambiar a GUI");
                 System.out.println("3.Guardar");
+                System.out.println("4.Ver movimientos de los pokemones");
                 int opcion = scanner.nextInt();
                 switch (opcion) {
                     case 1:
@@ -54,8 +55,11 @@ public class SeleccionPokemonTerminal implements SeleccionPokemonInterface{
                     case 3:
                         controlador.IniciarGuardado();
                         break;
+                    case 4:
+                        controlador.Vermovimientos();
+                        break;
                     default:
-                        throw new ExcepcionDeRangoIndice("Opción no válida. Por favor, elija una opción entre 1 y 3.");
+                        throw new ExcepcionDeRangoIndice("Opción no válida. Por favor, elija una opción entre 1 y 4.");
                 }
             }
         }
