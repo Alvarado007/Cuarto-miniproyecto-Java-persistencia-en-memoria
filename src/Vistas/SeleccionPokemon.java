@@ -11,6 +11,8 @@ package Vistas;
 
 import javax.swing.Action;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import Clases.Entrenador;
 import Clases.Pokemon;
@@ -136,6 +138,14 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
         BotonVerMovimientos.setBounds(330, 270, 140, 29);
         BotonVerMovimientos.addActionListener(this);
 
+        area = new JTextArea(15, 40);
+        area.setWrapStyleWord(true);
+        area.setLineWrap(true);
+        area.setEditable(false);
+
+        scroll = new JScrollPane(area);
+        scroll.setPreferredSize(new java.awt.Dimension(500, 300));
+
         LabelFondoSeleccionPokemon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logos/Pikachu Fondo Resized.jpeg"))); // NOI18N
         jPanel1.add(LabelFondoSeleccionPokemon);
         LabelFondoSeleccionPokemon.setBounds(0, 0, 800, 600);
@@ -199,6 +209,8 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
     private javax.swing.JButton BotonTerminal;
     private javax.swing.JButton BotonGuardarPartida;
     private javax.swing.JButton BotonVerMovimientos;
+    private JScrollPane scroll;
+    private JTextArea area ;
 
     // End of variables declaration
     @Override
@@ -221,6 +233,9 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
         }
         else if (e.getSource() == BotonGuardarPartida) {
             controlador.IniciarGuardado();
+        }
+        else if (e.getSource() == BotonVerMovimientos) {
+            controlador.Vermovimientos();
         }
         // if (PokemonGuardado == null) {
         //     Pokemon pokemon1 = ListEntrenador1.getSelectedValue();
@@ -317,7 +332,8 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
 
     @Override
     public void Mensaje(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje);
+        area.setText(mensaje);
+        JOptionPane.showMessageDialog(null,scroll, mensaje, JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

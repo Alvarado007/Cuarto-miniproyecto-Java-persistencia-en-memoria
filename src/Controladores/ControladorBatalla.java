@@ -1,5 +1,7 @@
 package Controladores;
 
+import java.util.Stack;
+
 import Clases.Batalla;
 import Clases.Entrenador;
 import Clases.Pokemon;
@@ -14,6 +16,7 @@ public class ControladorBatalla {
     private BatallaInterface vista;
     private Batalla batalla;
     private boolean ESGUI;
+    private  Stack<String> pila;
     //Recibe el modelo batalla no esta todavia
     public ControladorBatalla(Pokemon pokemon1, Pokemon pokemon2, BatallaPokemon vista, Batalla batalla, boolean ESGUI) {
         this.ESGUI = ESGUI;
@@ -70,8 +73,10 @@ public class ControladorBatalla {
                 vista2.actualizar(Short.toString(pokemon2.getVida()));
             }
             vista.Mensaje("Has atacado con " + pokemon1.getNombre() + " con un daño de " + pokemon1.getAtaque_actual());
+            pila.push("Has atacado con " + pokemon1.getNombre() + " con un daño de " + pokemon1.getAtaque_actual());
             if (batalla.getPokemonderrotado() == true) {
                 vista.Mensaje("El pokemon " + pokemon2.getNombre() + " ha sido derrotado");
+                pila.push("El pokemon " + pokemon2.getNombre() + " ha sido derrotado");
                 Regreso();
                 return true;
                 
@@ -92,8 +97,10 @@ public class ControladorBatalla {
                 vista2.actualizar(Short.toString(pokemon1.getVida()));
             }
             vista.Mensaje("Has atacado con " + pokemon2.getNombre() + " con un daño de " + pokemon2.getAtaque_actual());
+            pila.push("Has atacado con " + pokemon2.getNombre() + " con un daño de " + pokemon2.getAtaque_actual());
             if (batalla.getPokemonderrotado() == true) {
                 vista.Mensaje("El pokemon " + pokemon1.getNombre() + " ha sido derrotado");
+                pila.push("El pokemon " + pokemon1.getNombre() + " ha sido derrotado");
                 Regreso();
                 return true;
             }
@@ -121,6 +128,7 @@ public class ControladorBatalla {
         vista.Borrar();
         SeleccionPokemonInterface vistaSeleccion = new SeleccionPokemon();
         ControladorSeleccion controlador = new ControladorSeleccion(vistaSeleccion, batalla.getEntrenador1(), batalla.getEntrenador2(), ESGUI);
+        controlador.setPila(pila);
         controlador.cambiarVista();
     }
 
@@ -157,7 +165,10 @@ public class ControladorBatalla {
     public String vida2() {
         return Short.toString(pokemon2.getVida());
     }
-
+    public void setPila(Stack<String> pila) {
+        this.pila = pila;
+    }
+    
 
 
 }
