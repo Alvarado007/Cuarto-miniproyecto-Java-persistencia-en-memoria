@@ -56,8 +56,8 @@ public class SeleccionPokemonTerminal implements SeleccionPokemonInterface{
                         break;
                     default:
                         throw new ExcepcionDeRangoIndice("Opción no válida. Por favor, elija una opción entre 1 y 3.");
+                }
             }
-        }
         }
         catch (InputMismatchException e) {
             System.out.println("No se permiten caracteres, ingrese un número de las opciones válidas.");
