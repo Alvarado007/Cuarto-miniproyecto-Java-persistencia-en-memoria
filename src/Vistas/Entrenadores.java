@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import Clases.Entrenador;
 import Clases.Pokemon;
 import Controladores.ControladorEntrenadores;
+import Excepciones.ExcepcionVacioGUI;
 import Interfaces.EntrenadoresInterface;
 
 public class Entrenadores extends javax.swing.JFrame implements ActionListener, EntrenadoresInterface {
@@ -166,10 +167,18 @@ public class Entrenadores extends javax.swing.JFrame implements ActionListener, 
     public void actionPerformed(ActionEvent e) {
         controlador.setESGUI(true);
         if (e.getSource() == BotonContinuar) {
-            String Nombre1 =TextFieldEntrenador1.getText();
-            String Nombre2 =TextFieldEntrenador2.getText();
-            controlador.crearEntrenadores(Nombre1, Nombre2);
-            this.dispose();
+            try {
+                String Nombre1 =TextFieldEntrenador1.getText();
+                String Nombre2 =TextFieldEntrenador2.getText();
+                if (Nombre1.isEmpty() || Nombre2.isEmpty()) {
+                    throw new ExcepcionVacioGUI("Los nombres de los entrenadores no pueden estar vacíos.");
+                }
+                controlador.crearEntrenadores(Nombre1, Nombre2);
+                this.dispose();
+            }
+            catch (ExcepcionVacioGUI ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         else if (e.getSource() == BotonTerminal) {
             controlador.setESGUI(false);

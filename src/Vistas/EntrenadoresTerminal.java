@@ -1,10 +1,12 @@
 package Vistas;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Clases.Pokemon;
 import Controladores.ControladorEntrenadores;
+import Excepciones.ExcepcionDeRangoIndice;
 import Interfaces.EntrenadoresInterface;
 
 public class EntrenadoresTerminal implements EntrenadoresInterface {
@@ -24,11 +26,12 @@ public class EntrenadoresTerminal implements EntrenadoresInterface {
 
     @Override
     public void Iniciar() {
-        System.out.println("Eliga una opcion:");
-        System.out.println("1. Nombres entrenadores");
-        System.out.println("2. Cambiar a GUI");
-        int opcion = scanner.nextInt();
-        switch (opcion) {
+        try {
+            System.out.println("Eliga una opción:");
+            System.out.println("1. Nombres entrenadores");
+            System.out.println("2. Cambiar a GUI");
+            int opcion = scanner.nextInt();
+            switch (opcion) {
             case 1:
                 controlador.setESGUI(false);
                 System.out.println("Nombre del Entrenador 1:");
@@ -37,10 +40,27 @@ public class EntrenadoresTerminal implements EntrenadoresInterface {
                 String nombreEntrenador2 = scanner.next();
                 controlador.crearEntrenadores(nombreEntrenador1, nombreEntrenador2);
                 break;
-        
             case 2:
                 controlador.cambiarVista();
                 break;
+            default:
+                throw new ExcepcionDeRangoIndice("Opción no válida. Por favor, elija una opción entre 1 y 2.");
+            }
+        }
+        catch (InputMismatchException e) {
+            System.out.println("No se permiten caracteres, ingrese un número de las opciones válidas.");
+            scanner.nextLine(); // Limpiar el buffer del scanner
+            Iniciar();
+        }
+        catch (ExcepcionDeRangoIndice e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.nextLine(); // Limpiar el buffer del scanner
+            Iniciar();
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.nextLine(); // Limpiar el buffer del scanner
+            Iniciar();
         }
     }
 

@@ -1,8 +1,10 @@
 package Vistas;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Controladores.ControladorBatalla;
+import Excepciones.ExcepcionDeRangoIndice;
 import Interfaces.BatallaInterface;
 
 public class BatallaPokemonTerminal implements BatallaInterface {
@@ -25,63 +27,130 @@ public class BatallaPokemonTerminal implements BatallaInterface {
             String AtatquePrimerEntrenador2, String AtatquePrimerEntrenador3, String AtatquePrimerEntrenador4,
             String AtatqueSegundoEntrenador1, String AtatqueSegundoEntrenador2, String AtatqueSegundoEntrenador3,
             String AtatqueSegundoEntrenador4, String imagen1, String imagen2) {
-        System.out.println("Elija una opcion:");
-        System.out.println("1. Iniciar Batalla");
-        System.out.println("2. Cambiar a GUI");
-        int opcion = scanner.nextInt();
-        switch (opcion) {
-            case 1:{
-                this.controlador.setESGUI(false);
-                int turno1 = 0;
-                int turno2 = 0;
-                while (true){
-                    if (controlador.get_turno() == 1){
-                        if (turno1 == 0) {
-                            System.out.println("Vida: " + Vida1);
-                        } else {
-                            System.out.println(controlador.vida1());
-                        }
+        try {
+            System.out.println("Elija una opción:");
+            System.out.println("1. Iniciar Batalla");
+            System.out.println("2. Cambiar a GUI");
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:{
+                    this.controlador.setESGUI(false);
+                    int turno1 = 0;
+                    int turno2 = 0;
+                    while (true){
+                        if (controlador.get_turno() == 1){
+                            try {
+                                if (turno1 == 0) {
+                                    System.out.println("Vida: " + Vida1);
+                                } else {
+                                    System.out.println("Vida: " + controlador.vida1());
+                                }
                         
-                        System.out.println("Ataques:");
-                        System.out.println("1. " + AtatquePrimerEntrenador1);
-                        System.out.println("2. " + AtatquePrimerEntrenador2);
-                        System.out.println("3. " + AtatquePrimerEntrenador3);
-                        System.out.println("4. " + AtatquePrimerEntrenador4);
-                        int ataque = scanner.nextInt();
-                        turno1++;
-                        if(controlador.atacar(ataque - 1)){
-                            System.out.println("Batalla terminada. ");
-                            return;
+                                System.out.println("Ataques:");
+                                System.out.println("1. " + AtatquePrimerEntrenador1);
+                                System.out.println("2. " + AtatquePrimerEntrenador2);
+                                System.out.println("3. " + AtatquePrimerEntrenador3);
+                                System.out.println("4. " + AtatquePrimerEntrenador4);
+                                int ataque = scanner.nextInt();
+                                if (ataque > 4 || ataque < 1) {
+                                    throw new ExcepcionDeRangoIndice("Número de ataque no válido. Debe ser entre 1 y 4.");
+                                }
+                                turno1++;
+                                if(controlador.atacar(ataque - 1)){
+                                    System.out.println("Batalla terminada. ");
+                                    return;
+                                }
+                                
+                            }
+                            catch (ExcepcionDeRangoIndice e) {
+                                System.out.println("Error: " + e.getMessage());
+                                scanner.nextLine(); // Limpiar el buffer del scanner
+                                continue;
+                            }
+                            catch (InputMismatchException e) {
+                                System.out.println("No se permiten caracteres, ingrese un número de las opciones válidas.");
+                                scanner.nextLine(); // Limpiar el buffer del scanner
+                                continue;
+                            }
                         }
+                        else{
+                            try {
+                                if (turno2 == 0) {
+                                    System.out.println("Vida: " + Vida2);
+                                } else {
+                                    System.out.println("Vida: " + controlador.vida2());
+                                }
                         
-                    }
-                    else{
-                        if (turno2 == 0) {
-                            System.out.println("Vida: " + Vida2);
-                        } else {
-                            System.out.println(controlador.vida2());
-                        }
-                        
-                        System.out.println("Ataques:");
-                        System.out.println("1. " + AtatqueSegundoEntrenador1);
-                        System.out.println("2. " + AtatqueSegundoEntrenador2);
-                        System.out.println("3. " + AtatqueSegundoEntrenador3);
-                        System.out.println("4. " + AtatqueSegundoEntrenador4);
-                        int ataque = scanner.nextInt();
-                        turno2++;
-                        if(controlador.atacar(ataque - 1)) {
-                            System.out.println("Batalla terminada. ");
-                            return;
+                                System.out.println("Ataques:");
+                                System.out.println("1. " + AtatqueSegundoEntrenador1);
+                                System.out.println("2. " + AtatqueSegundoEntrenador2);
+                                System.out.println("3. " + AtatqueSegundoEntrenador3);
+                                System.out.println("4. " + AtatqueSegundoEntrenador4);
+                                int ataque = scanner.nextInt();
+                                if (ataque > 4 || ataque < 1) {
+                                    throw new ExcepcionDeRangoIndice("Número de ataque no válido. Debe ser entre 1 y 4.");
+                                }
+                                turno2++;
+                                if(controlador.atacar(ataque - 1)) {
+                                    System.out.println("Batalla terminada. ");
+                                    return;
+                                }
+                            }
+                            catch (ExcepcionDeRangoIndice e) {
+                                System.out.println("Error: " + e.getMessage());
+                                scanner.nextLine(); // Limpiar el buffer del scanner
+                                continue;
+                            }
+                            catch (InputMismatchException e) {
+                                System.out.println("No se permiten caracteres, ingrese un número de las opciones válidas.");
+                                scanner.nextLine(); // Limpiar el buffer del scanner
+                                continue;
+                            }
                         }
                     }
                 }
+                case 2:
+                    controlador.setESGUI(true);
+                    controlador.cambiarVista();
+                    break;
                 
+                default:
+                    throw new ExcepcionDeRangoIndice("Opción no válida. Por favor, elija una de las opciones disponibles.");
             }
-            case 2:
-                controlador.setESGUI(true);
-                controlador.cambiarVista();
-                break;
         }
+        catch (InputMismatchException e) {
+            System.out.println("No se permiten caracteres, ingrese un número de las opciones válidas.");
+            scanner.nextLine(); // Limpiar el buffer del scanner
+            Iniciar(nombre1, nombre2, Vida1, Vida2, AtatquePrimerEntrenador1,
+            AtatquePrimerEntrenador2, AtatquePrimerEntrenador3, AtatquePrimerEntrenador4,
+            AtatqueSegundoEntrenador1, AtatqueSegundoEntrenador2, AtatqueSegundoEntrenador3,
+            AtatqueSegundoEntrenador4, imagen1, imagen2);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Archivo no encontrado.");
+            scanner.nextLine(); // Limpiar el buffer del scanner
+            Iniciar(nombre1, nombre2, Vida1, Vida2, AtatquePrimerEntrenador1,
+            AtatquePrimerEntrenador2, AtatquePrimerEntrenador3, AtatquePrimerEntrenador4,
+            AtatqueSegundoEntrenador1, AtatqueSegundoEntrenador2, AtatqueSegundoEntrenador3,
+            AtatqueSegundoEntrenador4, imagen1, imagen2);
+        }
+        catch (ExcepcionDeRangoIndice e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.nextLine(); // Limpiar el buffer del scanner
+            Iniciar(nombre1, nombre2, Vida1, Vida2, AtatquePrimerEntrenador1,
+            AtatquePrimerEntrenador2, AtatquePrimerEntrenador3, AtatquePrimerEntrenador4,
+            AtatqueSegundoEntrenador1, AtatqueSegundoEntrenador2, AtatqueSegundoEntrenador3,
+            AtatqueSegundoEntrenador4, imagen1, imagen2);
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.nextLine(); // Limpiar el buffer del scanner
+            Iniciar(nombre1, nombre2, Vida1, Vida2, AtatquePrimerEntrenador1,
+            AtatquePrimerEntrenador2, AtatquePrimerEntrenador3, AtatquePrimerEntrenador4,
+            AtatqueSegundoEntrenador1, AtatqueSegundoEntrenador2, AtatqueSegundoEntrenador3,
+            AtatqueSegundoEntrenador4, imagen1, imagen2);
+        }
+        
     }
 
     @Override

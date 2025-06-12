@@ -199,9 +199,15 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
             this.dispose();
             controlador.cambiarVista();
         } else if (e.getSource() == BotonContinuarSeleccionPokemon) {
-            controlador.setESGUI(true);
-            controlador.InicioBatalla(ListEntrenador1.getSelectedValue(), ListEntrenador2.getSelectedValue());
-            this.dispose();
+            try {
+                controlador.setESGUI(true);
+                controlador.InicioBatalla(ListEntrenador1.getSelectedValue(), ListEntrenador2.getSelectedValue());
+                this.dispose();
+            }
+            catch (NullPointerException ex) {
+                Mensaje("Por favor, seleccione un Pokémon de cada entrenador antes de continuar.");
+            }
+            
         }
         else if (e.getSource() == BotonGuardarPartida) {
             controlador.IniciarGuardado();
