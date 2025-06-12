@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Stack;
+
+import javax.swing.JOptionPane;
 
 import Clases.Batalla;
 import Clases.Entrenador;
@@ -19,6 +22,7 @@ public class ControladorSeleccion {
     private Entrenador entrenador2;
     private Batalla batalla;
     private boolean ESGUI;
+    private Stack<String> pila = new Stack<>();
 
     
 
@@ -48,6 +52,7 @@ public class ControladorSeleccion {
         this.batalla = new Batalla(entrenador1, entrenador2, pokemon1, pokemon2);
         BatallaPokemon vistaBatalla = new BatallaPokemon();
         ControladorBatalla controlador = new ControladorBatalla(pokemon1, pokemon2, vistaBatalla, batalla, ESGUI);
+        controlador.setPila(pila);
         controlador.cambiarVista();
     }
 
@@ -99,4 +104,19 @@ public class ControladorSeleccion {
         }
     }
 
+    public void Vermovimientos(){
+        StringBuilder mensaje = new StringBuilder("Movimientos realizados:\n");
+        for (int i = pila.size() - 1; i >= 0; i--) {
+            mensaje.append("| ").append(pila.get(i)).append(" |\n");
+        }
+        mensaje.append("------");
+
+        vista.Mensaje(mensaje.toString());
+    }
+
+    public void setPila(Stack<String> pila) {
+        this.pila = pila;
+    }
+
+    
 }
