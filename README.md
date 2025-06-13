@@ -49,7 +49,7 @@ graph TD
     
     ModeloPokemon[**Modelo Pokemon**<br>────────────<br>- String nombre<br>- ArrayList ataques<br>- TiposPokemon tipo<br>- short vida<br>- byte contadorataques<br>- TiposPokemon counter<br>────────────<br>+ short defensa<br>+ short velocidad<br>+ short defensaEspecial<br>+ short ataque<br>+ Pokemon<br>+ short getAtaque<br>+ void setAtaque<br>+ String getNombre<br>+ void setNombre<br>+ TiposPokemon getTipo<br>+ void setTipo<br>+ short getVida<br>+ void setVida<br>+ TiposPokemon getCounter<br>+ void setCounter<br>+ void addAtaque<br>+ void setAtaques<br>+ byte getContadorataques<br>+ void setContadorataques<br>+ short getDefensa<br>+ void setDefensa<br>+ short getVelocidad<br>+ void setVelocidad<br>+ short getDefensaEspecial<br>+ void setDefensaEspecial<br>+ ArrayList getAtaques<br>+ void mostrarAtaques<br>+ String toString<br>+ void atacar<br>+ void recibirDaño]
 
-    ControladorSeleccionPokemon[**ControladorSeleccion**<br>────────────<br>- Interfaces.SeleccionPokemonInterface vista<br>- Entrenador entrenador1<br>- Entrenador entrenador2<br>- Batalla batalla<br>- boolean ESGUI<br>────────────<br>+ ControladorSeleccion<br>+ void iniciar<br>+ void InicioBatalla<br>+ void setBatalla<br>+ void cambiarVista<br>+ void setESGUI<br>+ void Desicion]
+    ControladorSeleccionPokemon[**ControladorSeleccion**<br>────────────<br>- Interfaces.SeleccionPokemonInterface vista<br>- Entrenador entrenador1<br>- Entrenador entrenador2<br>- Batalla batalla<br>- boolean ESGUI<br>- Pila<br>────────────<br>+ ControladorSeleccion<br>+ void iniciar<br>+ void InicioBatalla<br>+ void setBatalla<br>+ void cambiarVista<br>+ void setESGUI<br>+ void Desicion]
     
     VistaTerminalSeleccionPokemon[**SeleccionPokemonTerminal**<br>────────────<br>+ ControladorSeleccion controlador<br>+ Scanner scanner<br>+ SeleccionPokemonTerminal<br>+ void setControlador<br>+ void Iniciar<br>+ void Mensaje]
     
@@ -100,6 +100,10 @@ git clone git@github.com:Alvarado007/Cuarto-miniproyecto-Java-presistencia-en-me
 2. Abre el proyecto en tu IDE favorito.
 3. Asegúrate de tener Java instalado (Java 8+).
 4. Ejecuta la clase `Main` (por implementar) o una clase de prueba que cree entrenadores y pokémon para simular batallas.
+
+### 🧩 Estructuras Utilizadas
+- La pila fue utilizada para guardar los movimientos realizados durante la batalla.
+- El hash map fue utilizado para tener una relacion entre el nombre de los pokemones y sus gifts tanto de frente como de espalda asi mismo para relacionarlo tambien con su tipo y su counter.
 
 ### 👥 Autores
 - Samuel Alvarado – [GitHub](https://github.com/Alvarado007) 202459469
