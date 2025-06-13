@@ -33,7 +33,7 @@ Este proyecto es una simulación de combates entre Pokémon utilizando Java. El 
 ```mermaid
 graph TD
     %% Definición de los cuadros (nodos)
-    ControladorInicio[**ControladorInicio**<br>────────────<br>- Inicio Vista<br>- boolean ESGUI<br>────────────<br>+ public ControladorInicio<br>+ public void IniciarJuego<br>+ public void INICIAR<br>+ public void CambiarVista<br>+ public void setESGUS]
+    ControladorInicio[**ControladorInicio**<br>────────────<br>- Inicio Vista<br>- boolean ESGUI<br>────────────<br>+ public ControladorInicio<br>+ public void IniciarJuego<br>+ public void INICIAR<br>+ public void CambiarVista<br>+ public void setESGUS<br>+ void IniciarCarga<br>+ Entrenador CargarEntrenador]
 
     VistaTerminalInicio[**inicioPokemonTerminal**<br>────────────<br>- Scanner scanner<br>- ControladorInicio Controlador<br>────────────<br>+ public InicioPokemonTerminal<br>+ public void setControlador<br>+ public void Iniciar]
 
@@ -49,17 +49,21 @@ graph TD
     
     ModeloPokemon[**Modelo Pokemon**<br>────────────<br>- String nombre<br>- ArrayList ataques<br>- TiposPokemon tipo<br>- short vida<br>- byte contadorataques<br>- TiposPokemon counter<br>────────────<br>+ short defensa<br>+ short velocidad<br>+ short defensaEspecial<br>+ short ataque<br>+ Pokemon<br>+ short getAtaque<br>+ void setAtaque<br>+ String getNombre<br>+ void setNombre<br>+ TiposPokemon getTipo<br>+ void setTipo<br>+ short getVida<br>+ void setVida<br>+ TiposPokemon getCounter<br>+ void setCounter<br>+ void addAtaque<br>+ void setAtaques<br>+ byte getContadorataques<br>+ void setContadorataques<br>+ short getDefensa<br>+ void setDefensa<br>+ short getVelocidad<br>+ void setVelocidad<br>+ short getDefensaEspecial<br>+ void setDefensaEspecial<br>+ ArrayList getAtaques<br>+ void mostrarAtaques<br>+ String toString<br>+ void atacar<br>+ void recibirDaño]
 
-    ControladorSeleccionPokemon[**ControladorSeleccion**<br>────────────<br>- Interfaces.SeleccionPokemonInterface vista<br>- Entrenador entrenador1<br>- Entrenador entrenador2<br>- Batalla batalla<br>- boolean ESGUI<br>────────────<br>+ ControladorSeleccion<br>+ void iniciar<br>+ void InicioBatalla<br>+ void setBatalla<br>+ void cambiarVista<br>+ void setESGUI<br>+ void Desicion]
+    ControladorSeleccionPokemon[**ControladorSeleccion**<br>────────────<br>- Interfaces.SeleccionPokemonInterface vista<br>- Entrenador entrenador1<br>- Entrenador entrenador2<br>- Batalla batalla<br>- boolean ESGUI<br>- Pila<br>────────────<br>+ ControladorSeleccion<br>+ void iniciar<br>+ void InicioBatalla<br>+ void setBatalla<br>+ void cambiarVista<br>+ void setESGUI<br>+ void Desicion<br>+ void IniciarGuardado<br>+ void GuardarPartida<br>+ void Vermovimientos<br>+ void setPila]
     
     VistaTerminalSeleccionPokemon[**SeleccionPokemonTerminal**<br>────────────<br>+ ControladorSeleccion controlador<br>+ Scanner scanner<br>+ SeleccionPokemonTerminal<br>+ void setControlador<br>+ void Iniciar<br>+ void Mensaje]
     
-    VistaGUISeleccionPokemon[**SeleccionPokemon**<br>────────────<br>- void initComponents<br>- javax.swing.JButton BotonContinuarSeleccionPokemon<br>- javax.swing.JLabel LabelDeImagenEntrenador1<br>- javax.swing.JLabel LabelDeImagenEntrenador2<br>- javax.swing.JLabel LabelFondoSeleccionPokemon<br>- javax.swing.JLabel LabelNombreEntrenador1<br>- javax.swing.JLabel LabelNombreEntrenador2<br>- javax.swing.JList<Pokemon> ListEntrenador1<br>- javax.swing.JList<Pokemon> ListEntrenador2<br>- javax.swing.JPanel jPanel1<br>- javax.swing.JScrollPane jScrollPane1<br>- javax.swing.JScrollPane jScrollPane3<br>- javax.swing.JButton BotonTerminal<br>- javax.swing.JButton BotonGuardarPartida<br>────────────<br>+ ControladorSeleccion controlador<br>+ Pokemon PokemonGuardado<br>+ int ContadorEntrenadorTotal<br>+ SeleccionPokemon<br>+ static void main<br>- void actionPerformed<br>+ void setControlador<br>+ void Iniciar<br>+ void Mensaje]
+    VistaGUISeleccionPokemon[**SeleccionPokemon**<br>────────────<br>- void initComponents<br>- javax.swing.JButton BotonContinuarSeleccionPokemon<br>- javax.swing.JLabel LabelDeImagenEntrenador1<br>- javax.swing.JLabel LabelDeImagenEntrenador2<br>- javax.swing.JLabel LabelFondoSeleccionPokemon<br>- javax.swing.JLabel LabelNombreEntrenador1<br>- javax.swing.JLabel LabelNombreEntrenador2<br>- javax.swing.JList<Pokemon> ListEntrenador1<br>- javax.swing.JList<Pokemon> ListEntrenador2<br>- javax.swing.JPanel jPanel1<br>- javax.swing.JScrollPane jScrollPane1<br>- javax.swing.JScrollPane jScrollPane3<br>- javax.swing.JButton BotonTerminal<br>- javax.swing.JButton BotonGuardarPartida<br>- javax.swing.JButton BotonVerMovimientos<br>- JScrollPane scroll<br>- JTextArea area<br>────────────<br>+ ControladorSeleccion controlador<br>+ Pokemon PokemonGuardado<br>+ int ContadorEntrenadorTotal<br>+ SeleccionPokemon<br>+ static void main<br>- void actionPerformed<br>+ void setControlador<br>+ void Iniciar<br>+ void Mensaje]
 
     ControladorBatalla[**ControladorBatalla**<br>────────────<br>- Pokemon pokemon1<br>- Pokemon pokemon2<br>- BatallaInterface vista<br>- Batalla batalla<br>- boolean ESGUI<br>────────────<br>+ void iniciar<br>+ void atacar<br>+ Byte get_turno<br>+ Byte get_contadorAtaque1<br>+ Byte get_contadorAtaque2<br>+ void Regreso<br>+ void cambiarVista<br>+ void setESGUI<br>+ BatallaPokemon CastingVista<br>+ void MensajeTurno<br>+ String vida1<br>+ String vida2]
     
     VistaTerminalBatalla[**BatallaPokemonTerminal**<br>────────────<br>+ ControladorBatalla controlador<br>+ Scanner scanner<br>+ BatallaPokemonTerminal<br>+ void setControlador<br>+ void Iniciar<br>+ void Mensaje<br>+ void Borrar]
     
     VistaGUIBatalla[**BatallaPokemon**<br>────────────<br>- void initComponents<br>- javax.swing.JButton jButton1<br>- javax.swing.JButton jButton2<br>- javax.swing.JButton jButton3<br>- javax.swing.JButton jButton4<br>- javax.swing.JButton jButton5<br>- javax.swing.JButton jButton6<br>- javax.swing.JButton jButton7<br>- javax.swing.JButton jButton8<br>- javax.swing.JButton BotonTerminal<br>- javax.swing.JLabel jLabel1<br>- javax.swing.JLabel jLabel2<br>- javax.swing.JLabel jLabel3<br>- javax.swing.JLabel jLabel4<br>- javax.swing.JLabel jLabel5<br>- javax.swing.JLabel jLabel6<br>- javax.swing.JLabel jLabel7<br>- javax.swing.JPanel jPanel2<br>────────────<br>+ ControladorBatalla controlador<br>+ BatallaPokemon<br>+ static void main<br>+ void Ocultarbotones<br>+ void actionPerformed<br>+ void setControlador<br>+ void Iniciar<br>+ void actualizar<br>+ void Mensaje<br>+ void Borrar]
+
+    ExcepcionDeRangoIndice[**ExcepcionDeRangoIndice**<br>────────────<br>+ ExcepcionDeRangoIndice]
+
+    ExcepcionVacioGUI[**ExcepcionVacioGUI**<br>────────────<br>+ ExcepcionVacioGUI**]
 
     %% Conexiones entre los cuadros
     ControladorInicio --> VistaTerminalInicio
@@ -81,6 +85,13 @@ graph TD
     ControladorBatalla --> ControladorSeleccionPokemon
     ControladorBatalla --> VistaGUIBatalla
 
+    ExcepcionDeRangoIndice --> VistaTerminalInicio
+    ExcepcionDeRangoIndice --> VistaTerminalEntrenador
+    ExcepcionDeRangoIndice --> VistaTerminalSeleccionPokemon
+    ExcepcionDeRangoIndice --> VistaTerminalBatalla
+
+    ExcepcionVacioGUI --> VistaGUIEntrenador
+
     
 ```
 ###
@@ -100,6 +111,10 @@ git clone git@github.com:Alvarado007/Cuarto-miniproyecto-Java-presistencia-en-me
 2. Abre el proyecto en tu IDE favorito.
 3. Asegúrate de tener Java instalado (Java 8+).
 4. Ejecuta la clase `Main` (por implementar) o una clase de prueba que cree entrenadores y pokémon para simular batallas.
+
+### 🧩 Estructuras Utilizadas
+- La pila fue utilizada para guardar los movimientos realizados durante la batalla.
+- El hash map fue utilizado para tener una relacion entre el nombre de los pokemones y sus gifts tanto de frente como de espalda asi mismo para relacionarlo tambien con su tipo y su counter.
 
 ### 👥 Autores
 - Samuel Alvarado – [GitHub](https://github.com/Alvarado007) 202459469
