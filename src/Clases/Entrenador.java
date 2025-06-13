@@ -43,49 +43,6 @@ public class Entrenador extends SerVivo implements Serializable{
 
     }
 
-    // public void elegirPokemonBatallaManual(Scanner sc) {
-    //     for (byte i=0; i<3; i++){
-    //         System.out.println("Ingrese el nombre del Pókemon " + (i+1) + ": ");
-    //         String nombrePokemon = sc.nextLine();
-    //         System.out.println("Ingrese el tipo del Pókemon " + (i+1) + ": ");
-    //         System.out.println("1- Agua");
-    //         System.out.println("2- Fuego");
-    //         System.out.println("3- Electrico");
-    //         System.out.println("4- Psiquico");
-    //         TiposPokemon tipoPokemon = null;
-    //         TiposPokemon counterPokemon = null;
-    //         int opcionPokemon = sc.nextInt();
-    //         sc.nextLine();
-    //         if (opcionPokemon == 1){
-    //             tipoPokemon = TiposPokemon.AGUA;
-    //             counterPokemon = TiposPokemon.ELECTRICO;
-    //         } else if (opcionPokemon == 2){
-    //             tipoPokemon = TiposPokemon.FUEGO;
-    //             counterPokemon = TiposPokemon.AGUA;
-    //         } else if (opcionPokemon == 3){
-    //             tipoPokemon = TiposPokemon.ELECTRICO;
-    //             counterPokemon = TiposPokemon.PSIQUICO;
-    //         } else if (opcionPokemon == 4){
-    //             tipoPokemon = TiposPokemon.PSIQUICO;
-    //             counterPokemon = TiposPokemon.FUEGO;
-    //         } else {
-    //             System.out.println("Opción no válida.");
-    //         }
-    //         while(true){
-    //             System.out.println("Ingrese la vida del Pókemon " + (i+1) + ": ");
-    //             short vidaPokemon = sc.nextShort();
-    //             sc.nextLine();
-    //             if (vidaPokemon > 50 && vidaPokemon < 200){
-    //                 Pokemon pokemon = new Pokemon(nombrePokemon, tipoPokemon, vidaPokemon, counterPokemon);
-    //                 agregarPokemonEquipo(pokemon);
-    //                 break;
-    //             } else {
-    //                 System.out.println("La vida debe ser mayor a 50 y menor a 200.");
-    //             }
-    //         }
-    //     }
-    // }
-
     public short randomVida() {
         short vida = (short) (Math.random() * 100 + 100);
         return vida;
@@ -109,11 +66,20 @@ public class Entrenador extends SerVivo implements Serializable{
     }
 
     public void elegirPokemonBatallaAutomatico() {
+        /** Se crea el array de pokemones, para guardar los 70 pokemones existentes, 
+         * los dos HashMap "tipoPokemon" y "counters", que guardan los tipos de pokemones
+         * y sus counters respectivamente, y el ArrayList "nombresPokemones" que guarda los nombres
+         * de los mismos. */
         ArrayList<Pokemon> pokemones = new ArrayList<>();
         HashMap<String, TiposPokemon> tipoPokemon = getTipoPokemon();
         HashMap<String, TiposPokemon> counters = getCounters();
         ArrayList<String> nombresPokemones = getPokemones();
         for (int i = 0; i < 70; i++) {
+            /** Se elige aleatoriamente un pokemon con "Math.random()" entre todos los pokemones
+             * existentes, se toma su nombre, y después su tipo y su counter dependiendo del nombre,
+             * después se asigna aleatoriamente los valores de vida, defensa, velocidad, defensa especial
+             * y ataque, se crea un nuevo objeto "Pokemon" con estos valores, y finalmente se agrega
+             * a la lista de pokemones del entrenador. */
             String nombre = nombresPokemones.get((int) (Math.random() * nombresPokemones.size() ));
             TiposPokemon tipo = tipoPokemon.get(nombre);
             TiposPokemon counter = counters.get(nombre);
@@ -128,6 +94,10 @@ public class Entrenador extends SerVivo implements Serializable{
         
             
         for (byte i=0; i<3; i++){
+            /** Se eligen aleatoriamente 3 pokemones de la lista de pokemones disponibles con
+             * "Math.random()", se toma del pokemon seleccionado su índice, se agrega al equipo
+             * del entrenador con "agregarPokemonEquipo(pokemon)", y se elimina de la lista (pueden
+             * haber pokemones repetidos en el mismo equipo, pero no con los mismos valores o atributos)". */
             int randomIndex = (int) (Math.random() * pokemones.size());
             Pokemon pokemon = pokemones.get(randomIndex);
             agregarPokemonEquipo(pokemon);
@@ -136,6 +106,12 @@ public class Entrenador extends SerVivo implements Serializable{
     }
     public void agregraAtaquesPokemonesAutomatico() {
         ArrayList<Ataque>ataques=Ataque.getAtaques();
+        /** Se crea un "for" de todos los pokemones del equipo del entrenador, y dentro hay otro
+         * "for" que itera 3 veces(cantidad de ataques normales del pokemon), genera un índice aleatorio
+         * después de tomar el tamaño de la lista de ataques, y se verifica si el tipo de ataque
+         * es igual al tipo del pokemon, si es así, se agrega el ataque al pokemon y se elimina de la
+         * lista de ataques, y si no es así, vuelve a iterar hasta encontrar un ataque que coincida, y
+         * a lo último se llama a la funcion "agregraAtaquesPokemonesAutomaticoEspeciales()". */
         for (Pokemon pokemon : equipo_entrenador) {
             for (byte i=0; i<3; i++){
                 while (true){
@@ -152,6 +128,9 @@ public class Entrenador extends SerVivo implements Serializable{
         agregraAtaquesPokemonesAutomaticoEspeciales();
     }
     public void agregraAtaquesPokemonesAutomaticoEspeciales() {
+        /** Se toma el array de todos los ataques especiales, y se realiza el mismo procedimiento
+         * que con los ataques normales, pero esta vez solo itera una vez, ya que el pokemon solo
+         * puede tener un ataque especial. */
         ArrayList<Ataque>ataques=Ataque.getAtaquesEspeciales();
         for (Pokemon pokemon : equipo_entrenador) {
             for (byte i=0; i<1; i++){
@@ -168,60 +147,6 @@ public class Entrenador extends SerVivo implements Serializable{
         }
     }
 
-    // public void agregarAtaquePokemonManual(Scanner sc) {
-    //     for (Pokemon pokemon : equipo_entrenador) {
-    //         for (byte i=0; i<4; i++){
-    //             while (true){
-    //                 System.out.println("Ingrese el nombre del ataque " + (i+1) + " " + "de " + pokemon.getNombre() + ": ");
-    //                 String nombreAtaque = sc.nextLine();
-    //                 System.out.println("Ingrese el tipo de daño del ataque: ");
-    //                 System.out.println("1- Fisico");
-    //                 System.out.println("2- Especial");
-    //                 TipoDano tipoDano = null;
-    //                 int opcionTipoDano = sc.nextInt();
-    //                 sc.nextLine();
-    //                 if (opcionTipoDano == 1){
-    //                     tipoDano = TipoDano.Fisico;
-    //                 } else if (opcionTipoDano == 2){
-    //                     tipoDano = TipoDano.Especial;
-    //                 } else {
-    //                     System.out.println("Opción no válida.");
-    //                 }
-    //                 System.out.println("Ingrese el tipo de ataque: ");
-    //                 System.out.println("1- Agua");
-    //                 System.out.println("2- Fuego");
-    //                 System.out.println("3- Electrico");
-    //                 System.out.println("4- Psiquico");
-    //                 TiposPokemon tipoAtaque = null;
-    //                 int opcionAtaque = sc.nextInt();
-    //                 sc.nextLine();
-    //                 if (opcionAtaque == 1){
-    //                     tipoAtaque = TiposPokemon.AGUA;
-    //                 } else if (opcionAtaque == 2){
-    //                     tipoAtaque = TiposPokemon.FUEGO;
-    //                 } else if (opcionAtaque == 3){
-    //                     tipoAtaque = TiposPokemon.ELECTRICO;
-    //                 } else if (opcionAtaque == 4){
-    //                     tipoAtaque = TiposPokemon.PSIQUICO;
-    //                 } else {
-    //                     System.out.println("Opción no válida.");
-    //                 }
-    //                 while (true){
-    //                     System.out.println("Ingrese la potencia del ataque: ");
-    //                     short potencia = sc.nextShort();
-    //                     sc.nextLine();
-    //                     if ((potencia>20 && potencia<100)&& (tipoAtaque.equals(pokemon.getTipo()))){ 
-    //                         Ataque ataque = new Ataque(nombreAtaque, tipoDano, potencia, tipoAtaque);
-    //                         pokemon.addAtaque(ataque);
-    //                         break;
-    //                     } else {
-    //                         System.out.println("La potencia debe ser mayor a 20 y menor a 100.");
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
     public void mostrarEquipo() {
         byte contador = 1;
         for (Pokemon pokemon : equipo_entrenador) {

@@ -141,12 +141,19 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == BotonTerminal) {
             this.controlador.setESGUI(false);
+            /**Cierra la ventana y llama a "controlador.cambiarVista()", para cambiar a terminal." */
             this.dispose();
             controlador.cambiarVista();
         } else if (e.getSource() == BotonJugar) {
+            /**Llama a "controlador.iniciarJuego()", y cierra la ventana actual. */
             controlador.iniciarJuego();
             this.dispose();
         }
+        /** Si el boton "BotonCargarPartida" es presionado, se abre el "JFileChooser", y verifica la
+         * respuesta, si es "APPROVE_OPTION", se obtienen los archivos seleccionados,
+         * los guarda en una lista y llama al metodo "IniciarCarga" del controlador,
+         * que se encarga de iniciar la carga de la partida. Si no se selecciona nada,
+         * se muestra un mensaje de error, y por ultimo cierra la ventana actual. */
         else if (e.getSource() == BotonCargarPartida) {
             int respuesta = Seleccionador.showOpenDialog(null);
             if (respuesta == javax.swing.JFileChooser.APPROVE_OPTION) {
@@ -165,6 +172,9 @@ public class InicioPokemon extends javax.swing.JFrame implements ActionListener,
         this.controlador = controller;
     }
 
+    /**El metodo "Iniciar" se utiliza para cambiar el valor de "ESGUI" a verdadero, ya que en el
+    "ControladorInicio", cuando la vista se pone como GUI, cambia el valor de "ESGUI" a falso,
+    por lo que habría un error de lógica, y después se pone como "true" el valor para mostrar la ventana. */
     @Override
     public void Iniciar() {
         controlador.setESGUI(true);

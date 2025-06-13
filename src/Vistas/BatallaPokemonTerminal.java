@@ -41,8 +41,12 @@ public class BatallaPokemonTerminal implements BatallaInterface {
                         if (controlador.get_turno() == 1){
                             try {
                                 if (turno1 == 0) {
+                                    /** En caso de ser el primer turno de toda la partida, se muestra
+                                     * la vida inicial del Pokemon. */
                                     System.out.println("Vida: " + Vida1);
                                 } else {
+                                    /**En caso de ser otro turno, muestra la vida actual del Pokemon,
+                                     * es decir, después de haber recibido un ataque. */
                                     System.out.println("Vida: " + controlador.vida1());
                                 }
                         
@@ -73,6 +77,8 @@ public class BatallaPokemonTerminal implements BatallaInterface {
                                 continue;
                             }
                         }
+                        /** En caso de ser el turno del Entrenador 2, se aplica lo mismo que el del
+                         * Entrenador 1, pero con sus respectivos datos. */
                         else{
                             try {
                                 if (turno2 == 0) {

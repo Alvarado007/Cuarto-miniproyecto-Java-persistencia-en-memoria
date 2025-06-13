@@ -14,8 +14,6 @@ public class InicioPokemonTerminal implements Inicio{
 
     private Scanner scanner;
 
-    
-
     public InicioPokemonTerminal() {
         this.scanner = new Scanner(System.in);
     }
@@ -43,6 +41,12 @@ public class InicioPokemonTerminal implements Inicio{
                 controlador.cambiarVista();
                 break;
             case 3:
+                /** Se crea un nuevo "File", con su path, se tiene "archivos_enteros", que es
+                 * la lista de archivos que hay en "carpeta", se crea un array de archivos
+                 * de tamaño 2, y se itera por los archivos enteros, mostrando el nombre de cada uno,
+                 * se toma el número del primer y segundo archivo, y se le asigna "primerArchivo" a
+                 * la posición [0] y "segundoArchivo" a la posición [1] del array de archivos, y por
+                 * último se inicializa la carga de los archivos con dichos archivos guardados. */
                 controlador.setESGUI(false);
                 File carpeta = new File("src/Guardados");
                 File[] archivos_enteros = carpeta.listFiles();
@@ -83,10 +87,5 @@ public class InicioPokemonTerminal implements Inicio{
             scanner.nextLine(); // Limpiar el buffer del scanner
             Iniciar();
         }
-        
-        
-        
-        
     }
-    
 }

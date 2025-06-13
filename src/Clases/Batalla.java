@@ -19,6 +19,7 @@ public class Batalla {
     }
 
     public void turno() {
+        /** Se determina el turno dependiendo de qué Pokemon tenga mayor velocidad. */
         if (pokemon1.getVelocidad() >= pokemon2.getVelocidad()) {
             this.turno = (byte)(1); // Pokemon 1 ataca primero
         } else {
@@ -27,10 +28,15 @@ public class Batalla {
     }
 
     public void atacar(int indiceAtaque) {
+        /** Se determina el turno del jugador y se realiza el ataque al Pokemon del otro jugador,
+         * se le suma 1 al contador del ataque para ir desbloqueando el ataque especial y se cambia
+         * el turno al otro jugador. */
         if (turno == 1) {
             pokemon1.atacar(pokemon2, indiceAtaque);
             contadorAtaque1++;
             this.turno = 2; // Cambia el turno al Pokemon 2
+            /** Si la vida del Pokemon 2 es menor o igual a cero, es derrotado y se elimina de la lista
+             * de los pokemones del entrenador 2 */
             if (pokemon2.getVida() <= 0) {
                 this.Pokemonderrotado = true;
                 entrenador2.EliminarPokemon(pokemon2);
@@ -40,6 +46,7 @@ public class Batalla {
                 this.Pokemonderrotado = false;
             }
         } else {
+            /** Se realiza lo mismo que en el caso anterior pero para el otro Pokemon. */
             pokemon2.atacar(pokemon1, indiceAtaque);
             contadorAtaque2++;
             this.turno = 1; // Cambia el turno al Pokemon 1

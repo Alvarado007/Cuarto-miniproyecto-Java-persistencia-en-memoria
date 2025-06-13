@@ -26,7 +26,7 @@ public class SeleccionPokemonTerminal implements SeleccionPokemonInterface{
     public void Iniciar(String nombreEntrenador1, String nombreEntrenador2, Pokemon[] pokemonesEntrenador1, Pokemon[] pokemonesEntrenador2) {
         try {
             while(true){
-                System.out.println("Seleccione una opcion:");
+                System.out.println("Seleccione una opción:");
                 System.out.println("1. Seleccionar pokemones");
                 System.out.println("2. Cambiar a GUI");
                 System.out.println("3.Guardar");
