@@ -216,11 +216,18 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
     @Override
     public void actionPerformed(ActionEvent e) {
         controlador.setESGUI(true);
+        /** Al presionar "BotonTerminal", cambia el valor de "ESGUI" a "false", cierra la ventana actual
+         * y llama al metodo "cambiarVista" del controlador. */
         if (e.getSource() == BotonTerminal) {
             controlador.setESGUI(false);
             this.dispose();
             controlador.cambiarVista();
-        } else if (e.getSource() == BotonContinuarSeleccionPokemon) {
+        }
+        else if (e.getSource() == BotonContinuarSeleccionPokemon) {
+            /** Cambia el valor de "ESGUI" a "true", llama al metodo "InicioBatalla" del controlador,
+             * que toma los valores seleccionados (pokemones) de los JList, y cierra la ventana actual,
+             * pero se crea la excepción en caso de que se presione el botón de continuar sin ninguno
+             * haber seleccionado ningun Pokemon o que solo uno haya seleccionado un Pokemon. */
             try {
                 controlador.setESGUI(true);
                 controlador.InicioBatalla(ListEntrenador1.getSelectedValue(), ListEntrenador2.getSelectedValue());
@@ -229,7 +236,6 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
             catch (NullPointerException ex) {
                 Mensaje("Por favor, seleccione un Pokémon de cada entrenador antes de continuar.");
             }
-            
         }
         else if (e.getSource() == BotonGuardarPartida) {
             controlador.IniciarGuardado();
@@ -237,87 +243,16 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
         else if (e.getSource() == BotonVerMovimientos) {
             controlador.Vermovimientos();
         }
-        // if (PokemonGuardado == null) {
-        //     Pokemon pokemon1 = ListEntrenador1.getSelectedValue();
-        //     Pokemon pokemon2 = ListEntrenador2.getSelectedValue();
-        //     if (pokemon1.getVelocidad() >= pokemon2.getVelocidad()) {
-        //         BatallaPokemon batalla = new BatallaPokemon(entrenador1, entrenador2,(byte) 1, pokemon1, pokemon2);
-        //         this.dispose();
-        //         this.setVisible(false);
-        //         batalla.Ocultarbotones(); //new BatallaPokemon(entrenador1, entrenador2,(byte) ,pokemon1, pokemon2);
-        //     }
-        //     else {
-        //         BatallaPokemon batalla = new BatallaPokemon(entrenador1, entrenador2,(byte) 2, pokemon1, pokemon2);
-        //         this.dispose();
-        //         this.setVisible(false);
-        //         batalla.Ocultarbotones(); //new BatallaPokemon(entrenador1, entrenador2,(byte) ,pokemon1, pokemon2);
-        //     }
-        // } else {
-        //     if (ContadorEntrenadorTotal == 1) {
-        //         Pokemon pokemonEleccion = ListEntrenador2.getSelectedValue();
-        //         if (pokemonEleccion.getVelocidad() >= PokemonGuardado.getVelocidad()) {
-        //             BatallaPokemon batalla = new BatallaPokemon(entrenador1, entrenador2,(byte) 2, PokemonGuardado, pokemonEleccion);
-        //             this.dispose();
-        //             this.setVisible(false);
-        //             batalla.Ocultarbotones();
-        //         }
-        //         else{
-        //             BatallaPokemon batalla = new BatallaPokemon(entrenador1, entrenador2,(byte) 1, PokemonGuardado, pokemonEleccion);
-        //             this.dispose();
-        //             this.setVisible(false);
-        //             batalla.Ocultarbotones();
-        //         }//new BatallaPokemon(entrenador1, entrenador2,(byte) ,pokemon1, pokemon2);
-        //     } else if (ContadorEntrenadorTotal == 2) {
-        //         Pokemon pokemonEleccion = ListEntrenador1.getSelectedValue();
-        //         if (pokemonEleccion.getVelocidad() >= PokemonGuardado.getVelocidad()) {
-        //             BatallaPokemon batalla = new BatallaPokemon(entrenador1, entrenador2,(byte) 1, pokemonEleccion, PokemonGuardado);
-        //             this.dispose();
-        //             this.setVisible(false);
-        //             batalla.Ocultarbotones();
-        //         }
-        //         else{
-        //             BatallaPokemon batalla = new BatallaPokemon(entrenador1, entrenador2,(byte) 2, pokemonEleccion, PokemonGuardado);
-        //             this.dispose();
-        //             this.setVisible(false);
-        //             batalla.Ocultarbotones();
-        //         } //new BatallaPokemon(entrenador1, entrenador2,(byte) ,pokemon1, pokemon2);
-        //     }
-        // }
-
-
-
     }
-    // public void Ganador(){
-    //     if (entrenador1.getEquipo_entrenador().isEmpty()) {
-    //         JOptionPane.showMessageDialog(null, "Ganador: " + entrenador2.getNombre_entrenador());
-    //         this.dispose();
-    //         System.exit(0);
-    //     } else if (entrenador2.getEquipo_entrenador().isEmpty()) {
-    //         JOptionPane.showMessageDialog(null, "Ganador: " + entrenador1.getNombre_entrenador());
-    //         this.dispose();
-    //         System.exit(0);
-    //     } else {
-    //         System.out.println("No hay ganador aún.");
-    //     }
-    // }
-    // public void EleccionesPokemon(Entrenador entrenador1,  Entrenador entrenador2, Pokemon pokemonVivo,int ContadorEntrenador){
-    //     if  (ContadorEntrenador == 1) {
-    //         ListEntrenador1.setEnabled(false);
-    //         PokemonGuardado = pokemonVivo;
-    //         ContadorEntrenadorTotal = ContadorEntrenador;
-    //     }
-    //     else if (ContadorEntrenador == 2) {
-    //         ListEntrenador2.setEnabled(false);
-    //         PokemonGuardado = pokemonVivo;
-    //         ContadorEntrenadorTotal = ContadorEntrenador;
-    //     }
-    // }
 
     @Override
     public void setControlador(ControladorSeleccion controlador) {
         this.controlador = controlador;
     }
 
+    /** El metodo "Iniciar" toma los nombres de los entrenadores y sus respectivos equipos,
+     * después en los JLabel se muestran esos nombres, y en los JList se muestran los pokemones
+     * de cada entrenador, y finalmente se muestra la ventana. */
     @Override
     public void Iniciar(String nombreEntrenador1, String nombreEntrenador2, Pokemon[] pokemonesEntrenador1, Pokemon[] pokemonesEntrenador2) {
         LabelNombreEntrenador1.setText(nombreEntrenador1);
@@ -332,6 +267,9 @@ public class SeleccionPokemon extends javax.swing.JFrame implements ActionListen
 
     @Override
     public void Mensaje(String mensaje) {
+        /** Se realiza "area.setText(mensaje)" para mostrar el mensaje en el JTextArea,
+         * y se muestra la ventana con el "JOptionPane.showMessageDialog", que recibe el scroll en
+         * caso que el mensaje sea muy largo, el mensaje mismo y el tipo de mensaje. */
         area.setText(mensaje);
         JOptionPane.showMessageDialog(null,scroll, mensaje, JOptionPane.INFORMATION_MESSAGE);
     }

@@ -125,18 +125,27 @@ public class Pokemon implements Serializable {
     }
 
     public void atacar(Pokemon pokemon2, int indiceAtaque) {
+        /** Se toma el pokemon 2 y su indice de ataque con el getActionCommand, toma el ataque
+         * de la lista de ataques y se le asigna el daño generado con la formula. */
         Ataque ataquePokemon1 = ataques.get(indiceAtaque);
         int daño = (2/5*30+2)*(this.getAtaque()/pokemon2.getDefensa())*(ataquePokemon1.getPotencia()/50) + 2;
         if (ataquePokemon1.getTipoAtaque() == pokemon2.getCounter()) {
+            /** Se multiplica el daño por 1.5 si el tipo del ataque del Pokemon 1 es igual al counter
+             * del Pokemon 2. */
             daño = (int) (daño * 1.5);
         } else if (ataquePokemon1.getTipoAtaque() == pokemon2.getTipo()) {
+            /** Se multiplica el daño por 0.5 si el tipo del ataque del Pokemon 1 es igual al tipo
+             * del Pokemon 2. */
             daño = (int) (daño * 0.5);
         }
+        /** Se convierte ese daño en un String para que al atacar, se muestre el mensaje de cuanto
+         * daño le hizo al otro Pokemon, y el Pokemon 2 recibe el daño. */
         Ataque_actual = String.valueOf(daño);
         pokemon2.recibirDaño(daño);
     }
     
     public void recibirDaño(int daño) {
+        /**Se le resta el daño a la vida del Pokemon y se le asigna la vida restante. */
         short vidaRestante = (short) (vida - daño);
         this.vida = vidaRestante;
     }

@@ -70,5 +70,4 @@ public class EntrenadoresTerminal implements EntrenadoresInterface {
             System.out.println("Entrenador: " + nombreEntrenador + " Pokemon: " + equipo.get(i).getNombre());
         }
     }
-    
 }

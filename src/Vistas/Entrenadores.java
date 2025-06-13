@@ -166,6 +166,10 @@ public class Entrenadores extends javax.swing.JFrame implements ActionListener, 
     @Override
     public void actionPerformed(ActionEvent e) {
         controlador.setESGUI(true);
+        /** Toma los valores de texto de "Nombre1" y "Nombre2" con "TextFieldEntrenador.getText()", y
+         * después entra a la condición de que si alguno de los dos nombres está vacío, que lance
+         * una excepción, y después de la condición, se llama al metodo "crearEntrenadores"
+         * del controlador, que recibe los nombres de los entrenadores, y finalmente se cierra la ventana. */
         if (e.getSource() == BotonContinuar) {
             try {
                 String Nombre1 =TextFieldEntrenador1.getText();
@@ -180,6 +184,8 @@ public class Entrenadores extends javax.swing.JFrame implements ActionListener, 
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+        /** Se asigna el valor de "ESGUI" a "false", se cierra la ventana actual y se llama al metodo
+         * "cambiarVista() del controlador para cambiar la vista a terminal." */
         else if (e.getSource() == BotonTerminal) {
             controlador.setESGUI(false);
             this.dispose();
@@ -192,12 +198,16 @@ public class Entrenadores extends javax.swing.JFrame implements ActionListener, 
         this.controlador = controlador;
     }
 
+    /**El metodo "Iniciar" se utiliza para cambiar el valor de "ESGUI" a verdadero, ya que en el
+    "ControladorInicio", cuando la vista se pone como GUI, cambia el valor de "ESGUI" a falso,
+    por lo que habría un error de lógica, y después se pone como "true" el valor para mostrar la ventana. */
     @Override
     public void Iniciar() {
         this.setVisible(true);
         controlador.setESGUI(true);
     }
 
+    /** Muestra el nombre del entrenador y su equipo, este ultimo conformado por los 3 pokemones. */
     @Override
     public void Mostrar_equipo(String nombreEntrenador, ArrayList<Pokemon> equipo) {
         JOptionPane.showMessageDialog(this, "Equipo de " + nombreEntrenador + ": " + equipo);
