@@ -1,5 +1,4 @@
 
-<h2 align="left">Hi 👋! My name is Samuel and I'm a Systems Engineer from Colombia</h2>
 
 ###
 
@@ -132,3 +131,87 @@ Si quieres mejorar este proyecto o darme sugerencias, no dudes en escribirme.
 ---
 
 > Este es un proyecto académico con potencial para expandirse a una app con interfaz gráfica y lógica más compleja para torneos, niveles y más estrategia.
+
+
+###
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Alvarado007&repo=Primer-miniproyecto-java&theme=dracula" height="150" alt="project stats" />
+</div>
+
+###
+
+<img align="right" height="150" src="https://i.gifer.com/origin/7d/7dab25c7b14a249bbc4790176883d1c5_w200.gif?cid=6c09b952llhupk66joic0ml8gbch148n2dfdqsvzj7z7f0em&ep=v1_gifs_search&rid=200w.gif&ct=g" />
+
+###
+
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="30" alt="java logo" />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=vscode" height="30" alt="vscode logo" />
+</div>
+
+###
+
+## 📦 Project: Pokémon Battle Simulator (MVC)
+
+This project is a Pokémon battle simulator developed in Java. The system allows trainers to select and battle Pokémon with different attacks and types, including Water, Fire, Psychic, and Electric.
+
+### ✨ Features
+
+* Console-based and GUI-based Pokémon battle simulation.
+* Attack system with names, power values, and types.
+* The project is fully organized into packages following the MVC (Model-View-Controller) architecture, along with additional packages to improve code organization and readability.
+
+### 📊 MVC System Flow Diagram
+
+> **The Mermaid diagram remains unchanged from the original README.**
+
+###
+
+<img align="right" height="150" src="https://i.pinimg.com/originals/4e/fe/e1/4efee18cb06f3d2f8456a40d1e0460e7.gif?cid=6c09b952llhupk66joic0ml8gbch148n2dfdqsvzj7z7f0em&ep=v1_gifs_search&rid=200w.gif&ct=g" />
+
+###
+
+### 🛠️ Technologies
+
+* Java ☕
+* Visual Studio Code 💻
+
+### 🚀 How to Run
+
+1. Clone the repository:
+
+```bash
+git clone git@github.com:Alvarado007/Cuarto-miniproyecto-Java-presistencia-en-memoria.gits
+```
+
+2. Open the project in your preferred IDE.
+3. Make sure Java is installed on your system (Java 8+).
+4. Run the `Main` class (to be implemented) or a test class that creates trainers and Pokémon to simulate battles.
+
+### 🧩 Data Structures Used
+
+* A **stack** was used to store the moves performed during the battle.
+* A **HashMap** was used to establish relationships between Pokémon names and their front and back GIFs, as well as their types and counters.
+* **ArrayList** was used to manage Pokémon teams and their attacks.
+
+### 👥 Authors
+
+* Samuel Alvarado – [GitHub](https://github.com/Alvarado007) 202459469
+* Santiago Arboleda – [GitHub](https://github.com/SantiagoA0408) 202459463
+* Juan Manuel Gómez – [GitHub](https://github.com/JuanManuelG26706) 202459450
+
+### 📬 Contact
+
+If you would like to improve this project or have any suggestions, feel free to get in touch.
+
+<div align="left">
+  <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="gmail logo" />
+  <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="linkedin logo" />
+</div>
+
+---
+
+> This is an academic project with potential to be expanded into an application with a graphical interface and more complex game logic, including tournaments, levels, and additional strategic elements.
+
